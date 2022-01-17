@@ -1,13 +1,32 @@
-import Logo from "@/assets/logo.png";
-import HelloWorld from "@/components/HelloWorld/HelloWorld";
+import { Link, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-import styles from "./App.module.css";
+const Main = styled("main")({
+  textAlign: "center",
+  paddingTop: "30vh",
+});
+
+interface VSpacerProps {
+  size?: number | string;
+}
+const VSpacer = styled("div")((props: VSpacerProps) => ({
+  width: 1,
+  height: props.size ?? 10,
+}));
 
 export default function App() {
   return (
-    <main className={styles.main}>
-      <img className={styles.logo} alt="React logo" width="400px" src={Logo} />
-      <HelloWorld msg="Hello React + TypeScript + Vite" />
-    </main>
+    <Main>
+      <Typography variant="body1">
+        🚧 This website is under construction 🚧
+      </Typography>
+      <VSpacer size="10vh" />
+      <Typography variant="body2">
+        {"Check me out at "}
+        <Link href="https://github.com/gucosme">Github</Link>
+        {" or "}
+        <Link href="https://www.linkedin.com/in/gustavo-cosme/">LinkedIn</Link>
+      </Typography>
+    </Main>
   );
 }
