@@ -1,0 +1,58 @@
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  bucket: 's3://gucosme.dev/'
+  packageName: ${{ github.repository }}-${{ github.sha }}.zip
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+  AWS_REGION: sa-east-1
+  AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    environment: 'prod'
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.5.1
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies, run build
+        run: |
+          npm install
+          npm run build
+
+      - name: zip built files and sync with s3 bucket
+        run: |
+          cd dist
+          zip -r ${{ env.packageName }} *
+          aws s3 cp ${{ env.packageName }} ${{ env.bucket }} --acl public-read
+
+      - name: create amplify env and deploy from s3
+        run: |
+          aws amplify create-branch \
+            --app-id ${{ env.AMPLIFY_APP_ID }} \
+            --branch-name ${{ github.base_ref }}
+
+      - name: deploy amplify from s3
+        if: always()
+        run: |
+          aws amplify start-deployment \
+            --app-id ${{ env.AMPLIFY_APP_ID }} \
+            --branch-name ${{ github.base_ref }} \
+            --source-url https://s3.${{ env.AWS_REGION }}.amazonaws.com/gucosme.dev/${{ env.packageName }}

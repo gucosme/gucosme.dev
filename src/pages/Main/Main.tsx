@@ -13,6 +13,9 @@ const Main = () => (
     <Typography variant="body1">
       🚧 This website is under construction 🚧
     </Typography>
+    <Typography variant="body2">
+      Deployed from CI
+    </Typography>
     <VSpacer size="10vh" />
     <Typography variant="body2">
       {"Check me out at "}
