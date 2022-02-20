@@ -37,8 +37,8 @@ jobs:
       
       - name: Install dependencies, run build
         run: |
-          npm install
-          npm run build
+          pnpm install
+          pnpm build
 
       - name: zip built files and sync with s3 bucket
         run: |
