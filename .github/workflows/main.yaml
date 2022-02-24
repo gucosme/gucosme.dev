@@ -60,5 +60,5 @@ jobs:
         run: |
           aws amplify start-deployment \
             --app-id ${{ env.AMPLIFY_APP_ID }} \
-            --branch-name ${{ github.base_ref }} \
+            --branch-name ${{ github.head_ref }} \
             --source-url https://s3.${{ env.AWS_REGION }}.amazonaws.com/gucosme.dev/${{ env.packageName }}
