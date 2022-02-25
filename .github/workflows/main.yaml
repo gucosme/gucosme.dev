@@ -51,6 +51,7 @@ jobs:
       # so we return 'true' to ensure it'll always pass
       - name: create amplify env
         run: |
+          echo "current folder: " && pwd
           aws amplify create-branch \
             --app-id ${{ env.AMPLIFY_APP_ID }} \
             --branch-name ${{ github.head_ref }} \
