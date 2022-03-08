@@ -41,15 +41,17 @@ jobs:
           pnpm install
           pnpm build
 
-      - uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
-        with:
-          s3_bucket: ${{ env.bucket }}
-          package_name: ${{ env.packageName }}
-          build_path: website/app/build
-          branch_name: ${{ github.head_ref }}
-          domain_name: ${{ github.head_ref }}.gucosme.dev
-        secrets:
-          AMPLIFY_APP_ID: ${{ env.AMPLIFY_APP_ID }}
-          AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ env.AWS_REGION }}
+  deploy:
+    needs: [build]
+    uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
+    with:
+      s3_bucket: ${{ env.bucket }}
+      package_name: ${{ env.packageName }}
+      build_path: website/app/build
+      branch_name: ${{ github.head_ref }}
+      domain_name: ${{ github.head_ref }}.gucosme.dev
+    secrets:
+      AMPLIFY_APP_ID: ${{ env.AMPLIFY_APP_ID }}
+      AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ env.AWS_REGION }}
