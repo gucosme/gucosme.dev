@@ -45,7 +45,7 @@ jobs:
         run: |
           cd dist/
           zip -r ${{ env.packageName }} *
-          aws s3 cp ${{ github.head_ref }} ${{ env.bucket }} --acl public-read
+          aws s3 cp ${{ env.packageName }} ${{ env.bucket }} --acl public-read
 
   deploy:
     needs: [build]
