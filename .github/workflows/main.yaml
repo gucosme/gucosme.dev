@@ -51,7 +51,7 @@ jobs:
     uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
     with:
       environment: 'prod'
-      package_name: ${{ env.package_name }}
+      package_name: ${{ github.head_ref }}.zip
       branch_name: ${{ github.head_ref }}
       domain_name: ${{ github.head_ref }}.gucosme.dev
     secrets:
