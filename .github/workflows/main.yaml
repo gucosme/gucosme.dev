@@ -9,6 +9,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+environment: 'prod'
 env:
   bucket: 's3://gucosme.dev/'
   packageName: ${{ github.head_ref }}.zip
@@ -19,7 +20,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    environment: 'prod'
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
@@ -49,7 +49,6 @@ jobs:
   deploy:
     needs: build
     uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
-    environment: 'prod'
     with:
       package_name: ${{ github.head_ref }}
       branch_name: ${{ github.head_ref }}
