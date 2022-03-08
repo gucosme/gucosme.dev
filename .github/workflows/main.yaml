@@ -51,7 +51,7 @@ jobs:
       branch_name: ${{ github.head_ref }}
       domain_name: ${{ github.head_ref }}.gucosme.dev
     secrets:
-      AMPLIFY_APP_ID: ${{ env.AMPLIFY_APP_ID }}
-      AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ env.AWS_REGION }}
+      AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      AWS_REGION: sa-east-1
