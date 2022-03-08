@@ -41,8 +41,7 @@ jobs:
           pnpm install
           pnpm build
 
-      - name: Deploy to Amplify
-        uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
+      - uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
         with:
           s3_bucket: ${{ env.bucket }}
           package_name: ${{ env.packageName }}
