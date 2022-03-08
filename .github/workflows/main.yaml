@@ -45,7 +45,7 @@ jobs:
     needs: [build]
     uses: Twilio-Demo-Engineering/workflows/.github/workflows/amplify-deploy.yaml@add-amplify-deploy
     with:
-      s3_bucket: ${{ env.bucket }}
+      s3_bucket: 's3://gucosme.dev/'
       package_name: ${{ github.head_ref }}
       build_path: website/app/build
       branch_name: ${{ github.head_ref }}
