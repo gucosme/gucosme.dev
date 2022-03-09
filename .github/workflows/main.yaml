@@ -53,7 +53,7 @@ jobs:
       environment: 'prod'
       package_name: ${{ github.head_ref }}.zip
       branch_name: ${{ github.head_ref }}
-      domain_name: ${{ github.head_ref }}.gucosme.dev
+      domain_name: gucosme.dev
     secrets:
       AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
