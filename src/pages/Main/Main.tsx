@@ -14,7 +14,7 @@ const Main = () => (
       🚧 This website is under construction 🚧
     </Typography>
     <Typography variant="body2">
-      Deployed from CI (updated)
+      Deployed from CI (updated v2)
     </Typography>
     <VSpacer size="10vh" />
     <Typography variant="body2">
